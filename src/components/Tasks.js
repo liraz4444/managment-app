@@ -5,33 +5,37 @@ import { ProjectsContext } from "../store/projects-context";
 export default function Tasks() {
   const { tasks, onDeleteTask } = useContext(ProjectsContext);
   return (
-    <>
+    <Container>
       <h1>Tasks</h1>
       <NewTask />
-      <Container>
-        {tasks.length === 0 && null}
-        {tasks.length > 0 && (
-          <ul>
-            {tasks.map((task) => (
-              <li>
-                <span>{task.text}</span>
-                <ClearTaskkBtn onClick={() => onDeleteTask(task.id)}>
-                  Clear
-                </ClearTaskkBtn>
-              </li>
-            ))}
-          </ul>
-        )}
-      </Container>
-    </>
+      {tasks.length === 0 && null}
+      {tasks.length > 0 && (
+        <ul>
+          {tasks.map((task) => (
+            <li>
+              <span>{task.text}</span>
+              <ClearTaskkBtn onClick={() => onDeleteTask(task.id)}>
+                Clear
+              </ClearTaskkBtn>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Container>
   );
 }
 const Container = styled.div`
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: #e6b325;
   display: flex;
   flex-direction: column;
   font-family: "Indie Flower", cursive;
+  border: 3px solid;
+  border-radius: 5px;
+  margin-top: 15px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+
   & ul {
     list-style-type: none;
     padding: 0;
@@ -46,9 +50,9 @@ const Container = styled.div`
 
 const ClearTaskkBtn = styled.button`
   width: max-content;
-  background-color: #ddd;
-  border: none;
+  background-color: #bf9742;
   color: black;
+  border: none;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -57,8 +61,10 @@ const ClearTaskkBtn = styled.button`
   cursor: pointer;
   border-radius: 16px;
   font-family: "Indie Flower", cursive;
-
+  margin: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
   &:hover {
-    background-color: red;
+    background-color: #f1f1f1;
   }
 `;

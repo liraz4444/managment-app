@@ -8,23 +8,23 @@ export default function ShowProject() {
   return (
     <>
       <Container>
-        <ContainerBtn>
-          <Button onClick={() => onDeleteProject(selecteProject.id)}>
-            Delete
-          </Button>
-        </ContainerBtn>
         <ContainerStructs>
+          <ContainerBtn>
+            <Button onClick={() => onDeleteProject(selecteProject.id)}>
+              Delete
+            </Button>
+          </ContainerBtn>
           <h1>{selecteProject.title}</h1>
           <p>{selecteProject.description}</p>
-          <Tasks />
         </ContainerStructs>
+        <Tasks />
       </Container>
     </>
   );
 }
 const Container = styled.div`
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: #e6b325;
   padding: 20px;
 `;
 
@@ -34,13 +34,15 @@ const ContainerStructs = styled.div`
   height: 350px;
   flex-direction: column;
   font-family: "Indie Flower", cursive;
+  border: 3px solid;
+  border-radius: 5px;
+  padding-left: 10px;
 `;
 const Button = styled.button`
   width: max-content;
-  align-self: flex-end;
-  background-color: #ddd;
-  border: none;
+  background-color: #bf9742;
   color: black;
+  border: none;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -49,7 +51,9 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 16px;
   font-family: "Indie Flower", cursive;
-
+  margin: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
   &:hover {
     background-color: #f1f1f1;
   }

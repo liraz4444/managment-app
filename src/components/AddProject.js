@@ -24,16 +24,19 @@ export default function AddProject() {
     });
   }
   function handleClickSaveBtn() {
+    if (project.title.trim() === "" || project.description.trim() === "") {
+      return;
+    }
     onAddNewProject(project);
   }
   return (
     <>
       <Container>
-        <ContainerBtn>
-          <Button onClick={handleClickSaveBtn}>Save</Button>
-          <Button onClick={() => onCancel()}>Cancel</Button>
-        </ContainerBtn>
         <ContainerForm>
+          <ContainerBtn>
+            <Button onClick={handleClickSaveBtn}>Save</Button>
+            <Button onClick={() => onCancel()}>Cancel</Button>
+          </ContainerBtn>
           <label>Title</label>
           <input
             type="text"
@@ -54,7 +57,7 @@ export default function AddProject() {
 
 const Container = styled.div`
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: #e6b325;
   padding: 20px;
   margin: 20px;
 `;
@@ -64,22 +67,28 @@ const ContainerForm = styled.form`
   width: 600px;
   height: 350px;
   gap: 20px;
+  border: 3px solid;
+  border-radius: 5px;
   & label {
     max-width: max-content;
-    font-family: "Indie Flower", cursive;
+    font-weight: bold;
+    padding-left: 10px;
   }
   & input,
   textarea {
-    background-color: #eef0e5;
+    background-color: #ebef95;
     border-radius: 5px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 `;
 
 const Button = styled.button`
   width: max-content;
-  background-color: #ddd;
-  border: none;
+  background-color: #bf9742;
   color: black;
+  border: none;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -88,7 +97,9 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 16px;
   font-family: "Indie Flower", cursive;
-
+  margin: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
   &:hover {
     background-color: #f1f1f1;
   }

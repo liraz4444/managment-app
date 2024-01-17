@@ -10,16 +10,17 @@ export default function NewTask() {
     setTask(event.target.value);
   }
   function handleClick(id) {
+    if (task.trim() === "") {
+      return;
+    }
     onAddNewTaskToProject(task, id);
     setTask("");
   }
   return (
     <>
       <ContainerStructs>
-        <input type="text" onChange={handleNewTask} value={task}></input>
-        <Buttton onClick={() => handleClick(selecteProject.id)}>
-          Add Task
-        </Buttton>
+        <textarea type="text" onChange={handleNewTask} value={task}></textarea>
+        <Button onClick={() => handleClick(selecteProject.id)}>Add Task</Button>
       </ContainerStructs>
     </>
   );
@@ -27,19 +28,17 @@ export default function NewTask() {
 const ContainerStructs = styled.div`
   display: flex;
   font-family: "Indie Flower", cursive;
-  & input,
-  textarea {
-    background-color: #eef0e5;
-    border-radius: 5px;
+  justify-content: space-between;
+  & textarea {
+    background-color: #ebef95;
   }
 `;
 
-const Buttton = styled.button`
+const Button = styled.button`
   width: max-content;
-  align-self: flex-end;
-  background-color: #ddd;
-  border: none;
+  background-color: #bf9742;
   color: black;
+  border: none;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -48,7 +47,9 @@ const Buttton = styled.button`
   cursor: pointer;
   border-radius: 16px;
   font-family: "Indie Flower", cursive;
-
+  margin: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
   &:hover {
     background-color: #f1f1f1;
   }
