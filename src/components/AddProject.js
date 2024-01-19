@@ -1,54 +1,45 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { styled } from "styled-components";
 import { ProjectsContext } from "../store/projects-context";
 import { useContext } from "react";
 import { Button } from "../styles/ButtonStyle";
+import Modal from "./Modal";
 export default function AddProject() {
   const { onCancel, onAddNewProject } = useContext(ProjectsContext);
-  const [project, setNewProject] = useState({ title: "", description: "" });
+  const title = useRef();
+  const description = useRef();
+  const modal = useRef();
 
-  function handleAddNewTitle(event) {
-    setNewProject((prevValue) => {
-      return {
-        ...prevValue,
-        title: event.target.value,
-      };
-    });
-  }
-  function handleAddNewDescription(event) {
-    setNewProject((prevValue) => {
-      return {
-        ...prevValue,
-        description: event.target.value,
-      };
-    });
-  }
   function handleClickSaveBtn() {
-    if (project.title.trim() === "" || project.description.trim() === "") {
+    const enterTitle = title.current.value;
+    const enterDescription = description.current.value;
+    if (enterTitle.trim() === "" || enterDescription.trim() === "") {
+      modal.current.open();
       return;
     }
-    onAddNewProject(project);
+    onAddNewProject({
+      title: enterTitle,
+      description: enterDescription,
+    });
   }
   return (
     <>
+      <Modal ref={modal}>
+        <p>Oops... you forgot to fill in details</p>
+        <p>Please try again!</p>
+      </Modal>
       <Container>
         <ContainerForm>
           <ContainerBtn>
-            <Button onClick={handleClickSaveBtn}>Save</Button>
+            <Button type="button" onClick={handleClickSaveBtn}>
+              Save
+            </Button>
             <Button onClick={() => onCancel()}>Cancel</Button>
           </ContainerBtn>
           <label>Title</label>
-          <input
-            type="text"
-            onChange={handleAddNewTitle}
-            value={project.title}
-          ></input>
+          <input type="text" ref={title}></input>
           <label>Description</label>
-          <textarea
-            type="text"
-            onChange={handleAddNewDescription}
-            value={project.description}
-          ></textarea>
+          <textarea type="text" ref={description}></textarea>
         </ContainerForm>
       </Container>
     </>

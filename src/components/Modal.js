@@ -1,6 +1,7 @@
 import { useImperativeHandle, forwardRef, useRef } from "react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
+import { Button } from "../styles/ButtonStyle";
 const Modal = forwardRef(function Modal({ children }, ref) {
   const dialog = useRef();
 
@@ -9,6 +10,9 @@ const Modal = forwardRef(function Modal({ children }, ref) {
       open() {
         dialog.current.showModal();
       },
+      close() {
+        dialog.current.close();
+      },
     };
   });
 
@@ -16,10 +20,12 @@ const Modal = forwardRef(function Modal({ children }, ref) {
     <ContainerDialog ref={dialog}>
       {children}
       <form method="dialog">
-        <Button>Close</Button>
+        <Button type="button" onClick={() => dialog.current.close()}>
+          Close
+        </Button>
       </form>
     </ContainerDialog>,
-    document.getElementById("root")
+    document.getElementById("modal-root")
   );
 });
 
@@ -27,22 +33,4 @@ export default Modal;
 
 const ContainerDialog = styled.dialog`
   font-family: "Indie Flower", cursive;
-`;
-const Button = styled.button`
-  width: max-content;
-  background-color: #ddd;
-  border: none;
-  color: black;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 16px;
-  font-family: "Indie Flower", cursive;
-
-  &:hover {
-    background-color: #f1f1f1;
-  }
 `;

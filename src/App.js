@@ -6,6 +6,7 @@ import ShowProject from "./components/ShowProject";
 import styled from "styled-components";
 import { useState } from "react";
 import { ProjectsContext } from "./store/projects-context";
+
 function App() {
   let content;
   const [pickProject, setPickProject] = useState({
