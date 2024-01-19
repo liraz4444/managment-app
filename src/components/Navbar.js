@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { styled } from "styled-components";
 import { ProjectsContext } from "../store/projects-context";
+import { Button } from "../styles/ButtonStyle";
 export default function Navbar() {
   const { projects, clickNewProjectBtn, onClickProjectBtn } =
     useContext(ProjectsContext);
@@ -56,24 +57,5 @@ const Container = styled.div`
   & li,
   span {
     background-color: #61481c;
-  }
-`;
-const Button = styled.button`
-  width: max-content;
-  background-color: #e6b325;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 16px;
-  font-family: "Indie Flower", cursive;
-  font-weight: bold;
-  font-size: 1.2rem;
-  &:hover {
-    background-color: #f1f1f1;
   }
 `;

@@ -3,18 +3,20 @@ import NewTask from "./NewTask";
 import { useContext } from "react";
 import { ProjectsContext } from "../store/projects-context";
 export default function Tasks() {
-  const { tasks, onDeleteTask } = useContext(ProjectsContext);
+  const { selecteProject, onDeleteTask } = useContext(ProjectsContext);
   return (
     <Container>
       <h1>Tasks</h1>
       <NewTask />
-      {tasks.length === 0 && null}
-      {tasks.length > 0 && (
+      {selecteProject.tasks.length === 0 && null}
+      {selecteProject.tasks.length > 0 && (
         <ul>
-          {tasks.map((task) => (
-            <li>
+          {selecteProject.tasks.map((task) => (
+            <li key={task.id}>
               <span>{task.text}</span>
-              <ClearTaskkBtn onClick={() => onDeleteTask(task.id)}>
+              <ClearTaskkBtn
+                onClick={() => onDeleteTask(task.id, selecteProject.id)}
+              >
                 Clear
               </ClearTaskkBtn>
             </li>

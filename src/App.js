@@ -8,7 +8,12 @@ import { useState } from "react";
 import { ProjectsContext } from "./store/projects-context";
 function App() {
   let content;
-  const [pickProject, setPickProject] = useState(null);
+  const [pickProject, setPickProject] = useState({
+    id: "",
+    title: "",
+    description: "",
+    tasks: [],
+  });
   const [projectStatus, setStatus] = useState({
     page: "HomePage",
     projects: [],
@@ -43,6 +48,7 @@ function App() {
         id: newId,
         title: data.title,
         description: data.description,
+        tasks: [],
       };
       return {
         ...prevValue,
@@ -54,15 +60,32 @@ function App() {
 
   //Adding new task to project
   function addingNewTask(text, id) {
+    let updatesProjects;
     setStatus((prevValue) => {
       const newId = Math.random();
       const newTask = {
         id: newId,
         text: text,
       };
+      updatesProjects = prevValue.projects.map((project) => {
+        if (project.id === id) {
+          return {
+            ...project,
+            tasks: [...project.tasks, newTask],
+          };
+        }
+        return project;
+      });
       return {
         ...prevValue,
-        tasks: [...prevValue.tasks, newTask],
+        projects: updatesProjects,
+      };
+    });
+    setPickProject(() => {
+      const currProject = updatesProjects.find((project) => project.id === id);
+      return {
+        ...currProject,
+        tasks: currProject.tasks,
       };
     });
   }
@@ -79,13 +102,29 @@ function App() {
       };
     });
   }
-  function deleteTaskFromList(id) {
-    const delTask = projectStatus.tasks.filter((task) => task.id !== id);
+  function deleteTaskFromList(taskId, projectId) {
+    let updatesTasks;
+    let updatesProjectsWithTasks;
     setStatus((prevValue) => {
+      updatesProjectsWithTasks = prevValue.projects.map((proc) => {
+        if (proc.id === projectId) {
+          updatesTasks = proc.tasks.filter((task) => task.id !== taskId);
+          return {
+            ...proc,
+            tasks: updatesTasks,
+          };
+        }
+        return proc;
+      });
+      setPickProject((prevValue) => {
+        return {
+          ...prevValue,
+          tasks: updatesTasks,
+        };
+      });
       return {
         ...prevValue,
-        page: prevValue.page,
-        tasks: delTask,
+        projects: updatesProjectsWithTasks,
       };
     });
   }

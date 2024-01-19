@@ -3,8 +3,10 @@ import Tasks from "./Tasks";
 import { styled } from "styled-components";
 import { ProjectsContext } from "../store/projects-context";
 import { useContext } from "react";
+import { Button } from "../styles/ButtonStyle";
 export default function ShowProject() {
   const { selecteProject, onDeleteProject } = useContext(ProjectsContext);
+
   return (
     <>
       <Container>
@@ -38,26 +40,7 @@ const ContainerStructs = styled.div`
   border-radius: 5px;
   padding-left: 10px;
 `;
-const Button = styled.button`
-  width: max-content;
-  background-color: #bf9742;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 16px;
-  font-family: "Indie Flower", cursive;
-  margin: 10px;
-  font-weight: bold;
-  font-size: 1.2rem;
-  &:hover {
-    background-color: #f1f1f1;
-  }
-`;
+
 const ContainerBtn = styled.div`
   display: flex;
   flex-direction: row;
