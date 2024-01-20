@@ -1,6 +1,6 @@
 import React from "react";
 import image from "../images/main-img.png";
-import styled from "styled-components";
+import { Container } from "../styles/HomePageStyles";
 export default function HomePage() {
   return (
     <Container>
@@ -8,8 +8,3 @@ export default function HomePage() {
     </Container>
   );
 }
-
-const Container = styled.div`
-  margin-left: 350px;
-  margin-top: 100px;
-`;

@@ -1,8 +1,8 @@
 import React, { useContext, useRef } from "react";
 import { useState } from "react";
-import { styled } from "styled-components";
 import { ProjectsContext } from "../store/projects-context";
 import { Button } from "../styles/ButtonStyle";
+import { ContainerStructs } from "../styles/NewTaskStyles";
 import Modal from "./Modal";
 export default function NewTask() {
   const { onAddNewTaskToProject, selecteProject } = useContext(ProjectsContext);
@@ -14,6 +14,7 @@ export default function NewTask() {
   function handleClick(id) {
     if (task.trim() === "") {
       modal.current.open();
+
       return;
     }
     onAddNewTaskToProject(task, id);
@@ -32,11 +33,3 @@ export default function NewTask() {
     </>
   );
 }
-const ContainerStructs = styled.div`
-  display: flex;
-  font-family: "Indie Flower", cursive;
-  justify-content: space-between;
-  & textarea {
-    background-color: #ebef95;
-  }
-`;

@@ -1,7 +1,7 @@
 import { useImperativeHandle, forwardRef, useRef } from "react";
 import { createPortal } from "react-dom";
-import { styled } from "styled-components";
 import { Button } from "../styles/ButtonStyle";
+import { ContainerDialog } from "../styles/ModalStyles";
 const Modal = forwardRef(function Modal({ children }, ref) {
   const dialog = useRef();
 
@@ -30,7 +30,3 @@ const Modal = forwardRef(function Modal({ children }, ref) {
 });
 
 export default Modal;
-
-const ContainerDialog = styled.dialog`
-  font-family: "Indie Flower", cursive;
-`;
